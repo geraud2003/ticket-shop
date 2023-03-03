@@ -330,8 +330,9 @@ Drawer buildAdministratorDrawer(BuildContext context) {
   );
 }
 
-Future<Drawer> buildDrawer(context) async {
-  final prefs = await SharedPreferences.getInstance();
+Drawer buildDrawer(context) {
+  var prefs;
+   SharedPreferences.getInstance().then((value){prefs = value;});
   if (prefs.getString(Constant.ORGANISATEUR_ID_PREF_KEY) == null) {
     return buildUserDrawer(context);
   } else {
