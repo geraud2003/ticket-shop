@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:sharedpreference/sharedpreference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_shop/data/models/ticket.dart';
 import 'package:ticket_shop/utils/constants.dart';
 
 class TicketService {
   static Future<Ticket> create(data) async {
-    final prefs = await SharedPreference.instance;
-    final String token = prefs.get(Constant.TOKEN_PREF_KEY) ?? '';
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString(Constant.TOKEN_PREF_KEY) ?? '';
 
     var response = await Dio().post(Constant.BASE_URL + 'tickets',
         data: data,
@@ -16,8 +16,8 @@ class TicketService {
   }
 
   static Future<List<Ticket>> fetch ({queryParameters = null}) async {
-    final prefs = await SharedPreference.instance;
-    final String token = prefs.get(Constant.TOKEN_PREF_KEY) ?? '' ;
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString(Constant.TOKEN_PREF_KEY) ?? '' ;
 
     var response = await Dio().get(
         Constant.BASE_URL+'tickets',
@@ -30,8 +30,8 @@ class TicketService {
   }
 
   static Future<Ticket?> get(String ticket_id) async {
-    final prefs = await SharedPreference.instance;
-    final String token = prefs.get(Constant.TOKEN_PREF_KEY) ?? '' ;
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString(Constant.TOKEN_PREF_KEY) ?? '' ;
 
     var response = await Dio().get(
         '${Constant.BASE_URL}tickets/$ticket_id',

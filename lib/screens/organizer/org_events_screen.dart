@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sharedpreference/sharedpreference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_shop/components/app_bar.dart';
 import 'package:ticket_shop/components/drawer.dart';
 import 'package:ticket_shop/components/tscard.dart';
@@ -27,8 +27,8 @@ class _OrgEventsScreenState extends State<OrgEventsScreen> {
       isLoading = true;
     });
     try {
-      String organisateur_id =
-          SharedPreference.instance.get(Constant.ORGANISATEUR_ID_PREF_KEY);
+      final prefs = SharedPreferences.getInstance();
+      String organisateur_id = prefs.getString("Constant.ORGANISATEUR_ID_PREF_KEY")!;
       evenements = await OrganisateurService.getEvenements(organisateur_id);
     } on DioError catch (e) {
       print(e);

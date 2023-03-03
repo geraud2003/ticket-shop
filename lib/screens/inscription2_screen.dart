@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sharedpreference/sharedpreference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_shop/data/models/AuthenticatedUser.dart';
 import 'package:ticket_shop/data/services/users_service.dart';
 import 'package:ticket_shop/screens/home_screen.dart';
@@ -42,12 +42,12 @@ class _Inscription2ScreenState extends State<Inscription2Screen> {
         'email': email,
         'password': password
       });
-      final prefs = await SharedPreference.instance;
-      prefs.set(Constant.USERNAME_PREF_KEY, authenticatedUser.user!.username!);
-      prefs.set(Constant.EMAIL_PREF_KEY, authenticatedUser.user!.email!);
-      prefs.set(Constant.USER_ID_PREF_KEY, authenticatedUser.user!.id!);
-      prefs.set(Constant.ORGANISATEUR_ID_PREF_KEY, '');
-      prefs.set(Constant.TOKEN_PREF_KEY, authenticatedUser.accessToken!);
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(Constant.USERNAME_PREF_KEY, authenticatedUser.user!.username!);
+      prefs.setString(Constant.EMAIL_PREF_KEY, authenticatedUser.user!.email!);
+      prefs.setString(Constant.USER_ID_PREF_KEY, authenticatedUser.user!.id!);
+      prefs.setString(Constant.ORGANISATEUR_ID_PREF_KEY, '');
+      prefs.setString(Constant.TOKEN_PREF_KEY, authenticatedUser.accessToken!);
 
       Fluttertoast.showToast(msg: "Utilisateur créé avec succès");
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));

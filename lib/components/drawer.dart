@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sharedpreference/sharedpreference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_shop/screens/home_screen.dart';
 import 'package:ticket_shop/screens/login_screen.dart';
 import 'package:ticket_shop/screens/change_role_screen.dart';
@@ -330,9 +330,9 @@ Drawer buildAdministratorDrawer(BuildContext context) {
   );
 }
 
-Drawer buildDrawer(context) {
-  final prefs = SharedPreference.instance;
-  if (prefs.get(Constant.ORGANISATEUR_ID_PREF_KEY).empty()) {
+Future<Drawer> buildDrawer(context) async {
+  final prefs = await SharedPreferences.getInstance();
+  if (prefs.getString(Constant.ORGANISATEUR_ID_PREF_KEY) == null) {
     return buildUserDrawer(context);
   } else {
     return buildAdministratorDrawer(context);

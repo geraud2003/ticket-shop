@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sharedpreference/sharedpreference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_shop/components/app_bar.dart';
 import 'package:ticket_shop/components/tscard.dart';
 import 'package:ticket_shop/data/models/achat.dart';
@@ -30,8 +30,8 @@ class _TicketsAcheteScreenState extends State<TicketsAcheteScreen> {
       isLoading = true;
     });
     try {
-      final prefs = await SharedPreference.instance;
-      String user_id = prefs.get(Constant.USER_ID_PREF_KEY);
+      final prefs = await SharedPreferences.getInstance();
+      String user_id = prefs.getString(Constant.USER_ID_PREF_KEY)!;
       achats = await UserService.getAchats(user_id);
       for(int i = 0; i < achats.length; i++) {
         ticketsAchete.add(await TicketService.get(achats[i]!.ticketId!));

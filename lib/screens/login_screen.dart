@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sharedpreference/sharedpreference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_shop/data/models/AuthenticatedUser.dart';
 import 'package:ticket_shop/data/services/users_service.dart';
 import 'package:ticket_shop/screens/home_screen.dart';
@@ -35,14 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
       var organisateur =
           await UserService.getOrganisateur(authenticatedUser.user!.id!);
 
-      final prefs = await SharedPreference.instance;
-      prefs.set(
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(
           Constant.USERNAME_PREF_KEY, authenticatedUser.user!.username!);
-      prefs.set(Constant.EMAIL_PREF_KEY, authenticatedUser.user!.email!);
-      prefs.set(Constant.USER_ID_PREF_KEY, authenticatedUser.user!.id!);
-      prefs.set(Constant.ORGANISATEUR_ID_PREF_KEY,
+      prefs.setString(Constant.EMAIL_PREF_KEY, authenticatedUser.user!.email!);
+      prefs.setString(Constant.USER_ID_PREF_KEY, authenticatedUser.user!.id!);
+      prefs.setString(Constant.ORGANISATEUR_ID_PREF_KEY,
           '${organisateur == null ? '' : organisateur.id}');
-      prefs.set(Constant.TOKEN_PREF_KEY, authenticatedUser.accessToken!);
+      prefs.setString(Constant.TOKEN_PREF_KEY, authenticatedUser.accessToken!);
 
       Fluttertoast.showToast(msg: "Connexion effectuée avec succès");
       Navigator.pushReplacement(

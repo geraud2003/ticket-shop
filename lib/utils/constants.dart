@@ -1,6 +1,6 @@
 class Constant {
 
-  static const BASE_URL = "http://192.168.43.83:8000/api/";
+  static const BASE_URL = "https://ticket-shop.000webhostapp.com/api/";
 
   static const USERNAME_PREF_KEY = "username";
   static const EMAIL_PREF_KEY = "email";

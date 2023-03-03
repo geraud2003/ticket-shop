@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:ticket_shop/data/models/evenement.dart';
-import 'package:sharedpreference/sharedpreference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_shop/data/models/ticket.dart';
 import 'package:ticket_shop/utils/constants.dart';
 
 class EvenementService {
   static Future<Evenement> create(data) async {
-    final prefs = await SharedPreference.instance;
-    final String token = prefs.get(Constant.TOKEN_PREF_KEY) ?? '';
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString(Constant.TOKEN_PREF_KEY) ?? '';
 
     var response = await Dio().post(Constant.BASE_URL + 'evenements',
         data: data,
@@ -17,8 +17,8 @@ class EvenementService {
   }
 
   static Future<List<Evenement>> fetch ({queryParameters = null}) async {
-    final prefs = await SharedPreference.instance;
-    final String token = prefs.get(Constant.TOKEN_PREF_KEY) ?? '' ;
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString(Constant.TOKEN_PREF_KEY) ?? '' ;
 
     var response = await Dio().get(
         Constant.BASE_URL+'evenements',
