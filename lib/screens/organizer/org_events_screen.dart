@@ -27,7 +27,7 @@ class _OrgEventsScreenState extends State<OrgEventsScreen> {
       isLoading = true;
     });
     try {
-      final prefs = SharedPreferences.getInstance();
+      final prefs = await SharedPreferences.getInstance();
       String organisateur_id = prefs.getString("Constant.ORGANISATEUR_ID_PREF_KEY")!;
       evenements = await OrganisateurService.getEvenements(organisateur_id);
     } on DioError catch (e) {
