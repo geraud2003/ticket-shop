@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: firstPage == 'STARTING' ? const StartingScreen() : const HomeScreen(),
+      debugShowCheckedModeBanner: false
     );
   }
 }
