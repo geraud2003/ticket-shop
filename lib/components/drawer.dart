@@ -10,6 +10,9 @@ import 'package:ticket_shop/screens/ticket_achete_screen.dart';
 import 'package:ticket_shop/utils/constants.dart';
 
 Drawer buildUserDrawer(BuildContext context) {
+  var prefs;
+  SharedPreferences.getInstance().then((value) {prefs = value;});
+  
   return Drawer(
     backgroundColor: Color(0xffE97954),
     child: ListView(
@@ -22,7 +25,7 @@ Drawer buildUserDrawer(BuildContext context) {
 
           ),
           accountName:Text(
-              'Jane Doe',
+              prefs.getString(Constant.USERNAME_PREF_KEY),
               style: TextStyle(
                 fontSize: 24.0,
                 color: Color(0xffE97954),
@@ -31,7 +34,7 @@ Drawer buildUserDrawer(BuildContext context) {
               ),
             ),
           accountEmail: Text(
-            'jane.doe@example.com',
+            prefs.getString(Constant.EMAIL_PREF_KEY),
             style: TextStyle(
               fontSize: 18.0,
               color: Color(0xffE97954),
@@ -160,6 +163,9 @@ Drawer buildUserDrawer(BuildContext context) {
 }
 
 Drawer buildAdministratorDrawer(BuildContext context) {
+  var prefs;
+  SharedPreferences.getInstance().then((value) {prefs = value;});
+  
   return Drawer(
     backgroundColor: Color(0xffE97954),
     child: ListView(
@@ -171,7 +177,7 @@ Drawer buildAdministratorDrawer(BuildContext context) {
                 'https://images.unsplash.com/photo-1485290334039-a3c69043e517?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyOTU3NDE0MQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=300'),
           ),
           accountName:Text(
-            'Jane Doe',
+            prefs.getString(Constant.USERNAME_PREF_KEY),
             style: TextStyle(
               fontSize: 24.0,
               color: Color(0xffE97954),
@@ -180,7 +186,7 @@ Drawer buildAdministratorDrawer(BuildContext context) {
             ),
           ),
           accountEmail: Text(
-            'jane.doe@example.com',
+            prefs.getString(Constant.EMAIL_PREF_KEY),
             style: TextStyle(
               fontSize: 18.0,
               color: Color(0xffE97954),
